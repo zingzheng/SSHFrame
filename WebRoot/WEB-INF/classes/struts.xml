@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!--常量  定义在struts.properties文件中 -->
+	
+	<package name="struts2"  namespace="/"  extends="struts-default">
+		
+		<!-- 拦截器 -->
+		<interceptors>
+			<interceptor name="authInterceptor" class="bupt.zssdhl.SSHFrame.Interceptor.AuthInterceptor"></interceptor>
+			
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="authInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		
+		<!-- 全局结果定义 -->
+		<!--  
+		<global-results>
+			<result name="login" type="redirect">/WEB-INF/JSP/Login.jsp</result>
+		</global-results>
+			-->
+			
+			
+		<!-- action 配置 -->
+		<!-- class 为在spring中配置的id -->
+		<action name="login" class="loginAction">
+			<result name="input">/WEB-INF/JSP/Login.jsp</result>
+			<result name="error">/WEB-INF/JSP/Login.jsp</result>
+			<result name="success">/WEB-INF/JSP/MainFrame.jsp</result>
+		</action>
+		
+		<action name="logout" class="logoutAction">
+			<result>/WEB-INF/JSP/Login.jsp</result>
+		</action>
+		
+	</package>
+</struts>    

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" xmlns:tx="http://www.springframework.org/schema/tx">
+
+	<!--数据源配置  -->	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	    <property name="url" value="jdbc:mysql://10.109.247.251:3306/ssshfsql?characterEncoding=UTF-8"/>
+	    <property name="username" value="root"/>
+	    <property name="password" value="root"/>
+		<property name="initialSize" value="30"/>
+	 	<property name="maxActive" value="500"/> 
+		<property name="maxIdle" value="2"/>
+		<property name="minIdle" value="1"/>
+	</bean>
+	
+	<!-- hibernate sessionFactory配置 -->
+	<bean id="sessionFactory"  
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+     	<property name="dataSource" ref="dataSource"/>
+     	<property name="mappingResources">
+	    	<list>
+	    		<value>bupt/zssdhl/SSHFrame/Bean/User.hbm.xml</value>
+	    	</list>
+     	</property>
+     	<property name="hibernateProperties">
+	    	<value>
+	    		javax.persistence.validation.mode=none
+	        	hibernate.dialect=org.hibernate.dialect.MySQLDialect
+	        	hibernate.hbm2ddl.auto=update
+				hibernate.show_sql=true
+				hibernate.cache.use_second_level_cache=true
+        	    hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+        	    hibernate.generate_statistics=true	      
+			</value>
+    	</property>
+	</bean>
+	
+	<!-- hibernate事务配置 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	 
+	<!-- dao bean -->
+	<bean id="userDao" class="bupt.zssdhl.SSHFrame.DaoImpl.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+	
+	<!-- service bean -->
+	<bean id="userService" class="bupt.zssdhl.SSHFrame.ServiceImpl.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	
+	<!-- action bean -->
+	<bean id="loginAction" class="bupt.zssdhl.SSHFrame.Action.User.LoginAction" scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<bean id="logoutAction" class="bupt.zssdhl.SSHFrame.Action.User.LogoutAction" scope="prototype">
+	</bean>
+	
+	
+</beans>
