@@ -12,6 +12,7 @@ public class User {
 	private String pwd;
 	private String realname;
 	private Integer grade;
+	private String invitaCode;
 	
 	public Integer getId() {
 		return id;
@@ -42,6 +43,12 @@ public class User {
 	}
 	public void setGrade(Integer grade) {
 		this.grade = grade;
+	}
+	public String getInvitaCode() {
+		return invitaCode;
+	}
+	public void setInvitaCode(String invitaCode) {
+		this.invitaCode = invitaCode;
 	}
 	
 	

@@ -33,7 +33,37 @@
 		</action>
 		
 		<action name="logout" class="logoutAction">
-			<result>/WEB-INF/JSP/Login.jsp</result>
+			<result name="success" type="redirect">/index.jsp</result>
+		</action>
+		
+		<action name="regist" class="registAction">
+			<result name="success">/WEB-INF/JSP/Login.jsp</result>
+			<result name="error">/WEB-INF/JSP/Regist.jsp</result>
+			<result name="input">/WEB-INF/JSP/Regist.jsp</result>
+		</action>
+		
+		<action name="listUser" class="listUserAction">
+			<result name="success">/WEB-INF/JSP/ListUser.jsp</result>
+		</action>
+		
+		<action name="updateUserPre" class="updateUserPreAction">
+			<result name="success">/WEB-INF/JSP/UpdateUser.jsp</result>
+		</action>
+		
+		<action name="updateUser" class="updateUserAction">
+			<result name="success" type="redirect">listUser.action</result>
+			<result name="input">/WEB-INF/JSP/UpdateUser.jsp</result>
+		</action>
+		
+		<action name="delUser" class="delUserAction">
+			<result name="success" type="redirect">listUser.action</result>
+		</action>
+		
+		<action name="redirect_*" class="redirectAction" method="{1}">
+			<result name="gotoRegist" >/WEB-INF/JSP/Regist.jsp</result>
+			<result name="gotoLogin" >/WEB-INF/JSP/Login.jsp</result>
+			<result name="gotoMain" >/WEB-INF/JSP/MainFrame.jsp</result>
+			<result name="gotoListUser" type="redirect">listUser.action</result>
 		</action>
 		
 	</package>

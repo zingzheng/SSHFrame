@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>XX系统</title>
+    <title><s:text name="regist" /></title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -24,18 +24,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <h1 align="center"><s:text name="welcome" /></h1>
+     <h1 align="center"><s:text name="regist" /></h1>
     
     <center> 
     	<s:actionerror/>
-        <s:form action="login" namespace="/" method="post">
+        <s:form action="regist" namespace="/" method="post">
         	<s:token></s:token>
     		<s:textfield name="user.username" key="username"></s:textfield>
     		<s:password name="user.pwd" key="password"></s:password>
-    		<s:submit key="submit"></s:submit>
+    		<s:password name="repwd" key="repwd"></s:password>
+    		<s:textfield name="user.realname" key="realname"></s:textfield>
+    		<s:textfield name="user.grade" key="grade"></s:textfield>
+    		<s:textfield name="user.invitaCode" key="invitaCode"></s:textfield>
+    		<s:submit key="regist"></s:submit>
     	</s:form>
-    	 <s:a href="redirect_gotoRegist"><s:text name="regist" /></s:a>
+    	 <s:a href="redirect_gotoLogin"><s:text name="back" /></s:a>
     </center>
-     
   </body>
 </html>

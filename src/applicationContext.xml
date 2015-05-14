@@ -52,6 +52,7 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>	
 	
+	
 	<!-- service bean -->
 	<bean id="userService" class="bupt.zssdhl.SSHFrame.ServiceImpl.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
@@ -66,5 +67,26 @@
 	<bean id="logoutAction" class="bupt.zssdhl.SSHFrame.Action.User.LogoutAction" scope="prototype">
 	</bean>
 	
+	<bean id="registAction" class="bupt.zssdhl.SSHFrame.Action.User.RegistAction" scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
 	
+	<bean id="listUserAction" class="bupt.zssdhl.SSHFrame.Action.User.ListUserAction" scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<bean id="updateUserPreAction" class="bupt.zssdhl.SSHFrame.Action.User.UpdateUserPreAction" scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<bean id="updateUserAction" class="bupt.zssdhl.SSHFrame.Action.User.UpdateUserAction" scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<bean id="delUserAction" class="bupt.zssdhl.SSHFrame.Action.User.DelUserAction" scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	<bean id="redirectAction" class="bupt.zssdhl.SSHFrame.Action.User.RedirectAction" >
+	</bean>
 </beans>

@@ -25,6 +25,9 @@
 			<column name="grade" length="32"></column>
 		</property>
 		
+		<property name="invitaCode" type="java.lang.String">
+			<column name="invitaCode" length="64"></column>
+		</property>
 	
 	</class>
 

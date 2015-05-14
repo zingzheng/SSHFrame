@@ -17,7 +17,7 @@ public class AuthInterceptor extends AbstractInterceptor{
 	public String intercept(ActionInvocation invocation) throws Exception {
 		
 		Map map = invocation.getInvocationContext().getSession();
-		if(null == map.get("user")){
+		if(null == map.get("userSession")){
 			return Action.LOGIN;
 		}else{
 			return invocation.invoke();

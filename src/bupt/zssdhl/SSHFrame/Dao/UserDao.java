@@ -19,4 +19,8 @@ public interface UserDao {
 	
 	public List<User> findAllUsers();
 	
+	public List<User> findUsersLimit(int firstResult,int maxResult);
+	
+	public int getUserCount();
+	
 }

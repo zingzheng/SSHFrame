@@ -71,7 +71,23 @@ public class UserDaoImpl implements UserDao {
 				.createQuery("from User order by id");
 		return (List<User>)query.list();
 	}
-
+	
+	@Override
+	public List<User> findUsersLimit(int firstResult,int maxResult){
+		Query query = sessionFactory.getCurrentSession()
+				.createQuery("from User order by id");
+		query.setFirstResult(firstResult);
+		query.setMaxResults(maxResult);
+		return (List<User>)query.list();
+	}
+	
+	@Override
+	public int getUserCount(){
+		Query query = sessionFactory.getCurrentSession()
+				.createQuery("select count(*) from User");
+		return Integer.valueOf(((Long)query.uniqueResult()).toString());
+		  
+	}
 	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
