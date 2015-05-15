@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@include file="../JSP/CommonHead.jsp" %>
+<%@include file="../CommonJSP/CommonHead.jsp" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -43,7 +43,7 @@
     
     
     <br/><br/><br/>
-    <s:a href="redirect_gotoListUser"><s:text name="back" /></s:a>
+    <s:a href="redirect_gotoListUser">>><s:text name="manageUser" /></s:a>
     </center>
      
   </body>

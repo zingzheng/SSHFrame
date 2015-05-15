@@ -20,5 +20,7 @@
   
   <body>
     <s:text name="welcome" />: <s:property value="#session.userSession.username"/>
+    <s:a href="redirect_gotoMain">主页</s:a>
+   	<s:a href="updateUserPre.action?user.id=%{#session.userSession.id}">修改个人信息</s:a>
     <s:a href="logout.action"><s:text name="logout" /></s:a>
 </html>

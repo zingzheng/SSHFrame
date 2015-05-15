@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	<!--常量  定义在struts.properties文件中 -->
+	<!--常量  定义在struts.properties文件中 -->	
 	
 	<package name="struts2"  namespace="/"  extends="struts-default">
 		
@@ -17,19 +17,18 @@
 		
 		
 		<!-- 全局结果定义 -->
-		<!--  
 		<global-results>
-			<result name="login" type="redirect">/WEB-INF/JSP/Login.jsp</result>
+			<result name="login" type="redirect">/index.jsp</result>
 		</global-results>
-			-->
+			
 			
 			
 		<!-- action 配置 -->
 		<!-- class 为在spring中配置的id -->
 		<action name="login" class="loginAction">
-			<result name="input">/WEB-INF/JSP/Login.jsp</result>
-			<result name="error">/WEB-INF/JSP/Login.jsp</result>
-			<result name="success">/WEB-INF/JSP/MainFrame.jsp</result>
+			<result name="input">/WEB-INF/UserJSP/Login.jsp</result>
+			<result name="error">/WEB-INF/UserJSP/Login.jsp</result>
+			<result name="success">/WEB-INF/CommonJSP/MainFrame.jsp</result>
 		</action>
 		
 		<action name="logout" class="logoutAction">
@@ -37,34 +36,51 @@
 		</action>
 		
 		<action name="regist" class="registAction">
-			<result name="success">/WEB-INF/JSP/Login.jsp</result>
-			<result name="error">/WEB-INF/JSP/Regist.jsp</result>
-			<result name="input">/WEB-INF/JSP/Regist.jsp</result>
+			<result name="success">/WEB-INF/UserJSP/Login.jsp</result>
+			<result name="error">/WEB-INF/UserJSP/Regist.jsp</result>
+			<result name="input">/WEB-INF/UserJSP/Regist.jsp</result>
 		</action>
 		
 		<action name="listUser" class="listUserAction">
-			<result name="success">/WEB-INF/JSP/ListUser.jsp</result>
+			<result name="success">/WEB-INF/UserJSP/ListUser.jsp</result>
+			<interceptor-ref name="myStack"></interceptor-ref>
 		</action>
 		
 		<action name="updateUserPre" class="updateUserPreAction">
-			<result name="success">/WEB-INF/JSP/UpdateUser.jsp</result>
+			<result name="success">/WEB-INF/UserJSP/UpdateUser.jsp</result>
+			<interceptor-ref name="myStack"></interceptor-ref>
 		</action>
 		
 		<action name="updateUser" class="updateUserAction">
 			<result name="success" type="redirect">listUser.action</result>
-			<result name="input">/WEB-INF/JSP/UpdateUser.jsp</result>
+			<result name="input">/WEB-INF/UserJSP/UpdateUser.jsp</result>
+			<interceptor-ref name="myStack"></interceptor-ref>
 		</action>
 		
 		<action name="delUser" class="delUserAction">
 			<result name="success" type="redirect">listUser.action</result>
+			<interceptor-ref name="myStack"></interceptor-ref>
+		</action>
+		
+		<!--不需要验证的跳转  -->
+		<action name="r_*" class="redirectAction" method="{1}">
+			<result name="gotoRegist" >/WEB-INF/UserJSP/Regist.jsp</result>
+			<result name="gotoLogin" >/WEB-INF/UserJSP/Login.jsp</result>
 		</action>
 		
 		<action name="redirect_*" class="redirectAction" method="{1}">
-			<result name="gotoRegist" >/WEB-INF/JSP/Regist.jsp</result>
-			<result name="gotoLogin" >/WEB-INF/JSP/Login.jsp</result>
-			<result name="gotoMain" >/WEB-INF/JSP/MainFrame.jsp</result>
+			<result name="gotoMain" >/WEB-INF/CommonJSP/MainFrame.jsp</result>
 			<result name="gotoListUser" type="redirect">listUser.action</result>
+			<result name="gotoTuRing" >/WEB-INF/ApiJSP/TuRing.jsp</result>
+			<interceptor-ref name="myStack"></interceptor-ref>
 		</action>
-		
+	
+	<action name="turing" class="tuRingAction">
+		<result name="success" >/WEB-INF/ApiJSP/TuRing.jsp</result>
+		<interceptor-ref name="myStack"></interceptor-ref>
+	</action>
+	
 	</package>
+	
+
 </struts>    

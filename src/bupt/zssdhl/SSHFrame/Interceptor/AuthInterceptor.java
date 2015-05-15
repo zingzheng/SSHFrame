@@ -3,6 +3,7 @@ import java.util.Map;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
+import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 /**
@@ -18,6 +19,7 @@ public class AuthInterceptor extends AbstractInterceptor{
 		
 		Map map = invocation.getInvocationContext().getSession();
 		if(null == map.get("userSession")){
+	
 			return Action.LOGIN;
 		}else{
 			return invocation.invoke();

@@ -20,5 +20,8 @@ public class RedirectAction extends ActionSupport{
 	public String gotoListUser() throws Exception{
 		return "gotoListUser";
 	}
-
+	
+	public String gotoTuRing() throws Exception{
+		return "gotoTuRing";
+	}
 }

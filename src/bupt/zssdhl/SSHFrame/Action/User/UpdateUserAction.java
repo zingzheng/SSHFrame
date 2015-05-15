@@ -46,7 +46,7 @@ public class UpdateUserAction extends ActionSupport{
 	@Override
 	public String execute() throws Exception{
 		
-		if(null != newpwd){
+		if(null != newpwd && !"".equals(newpwd.trim())){
 			user.setPwd(newpwd);
 		}
 		userService.updateUser(user);

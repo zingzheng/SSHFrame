@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public boolean loginCheck(User user) {
+		
 		User userCheck = userDao.findUserByUsername(user.getUsername());
 		if(null == userCheck){
 			_log.warn("this username is not regist" + user.getUsername() );
@@ -34,6 +35,7 @@ public class UserServiceImpl implements UserService {
 				_log.warn("pwd is not correct");
 				return false;
 			}else{
+				user.setId(userCheck.getId());
 				return true;
 			}
 		}

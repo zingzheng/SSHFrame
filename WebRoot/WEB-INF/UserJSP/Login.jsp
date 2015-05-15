@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>XX系统</title>
+    <title>登山包</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<s:password name="user.pwd" key="password"></s:password>
     		<s:submit key="submit"></s:submit>
     	</s:form>
-    	 <s:a href="redirect_gotoRegist"><s:text name="regist" /></s:a>
+    	 <s:a href="r_gotoRegist"><s:text name="regist" /></s:a>
     </center>
      
   </body>

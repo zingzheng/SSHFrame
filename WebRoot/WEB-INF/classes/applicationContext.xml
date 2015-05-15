@@ -58,6 +58,9 @@
 		<property name="userDao" ref="userDao" />
 	</bean>
 	
+	<bean id="tuRingService" class="bupt.zssdhl.SSHFrame.ServiceImpl.TuRingServiceImpl">
+	</bean>
+	
 	
 	<!-- action bean -->
 	<bean id="loginAction" class="bupt.zssdhl.SSHFrame.Action.User.LoginAction" scope="prototype">
@@ -89,4 +92,9 @@
 	
 	<bean id="redirectAction" class="bupt.zssdhl.SSHFrame.Action.User.RedirectAction" >
 	</bean>
+	
+	<bean id="tuRingAction" class="bupt.zssdhl.SSHFrame.Action.API.TuRingAction" scope="prototype">
+		<property name="tuRingService" ref="tuRingService" />
+	</bean>
+	
 </beans>

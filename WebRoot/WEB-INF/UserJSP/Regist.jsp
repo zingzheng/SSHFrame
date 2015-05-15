@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<s:textfield name="user.invitaCode" key="invitaCode"></s:textfield>
     		<s:submit key="regist"></s:submit>
     	</s:form>
-    	 <s:a href="redirect_gotoLogin"><s:text name="back" /></s:a>
+    	 <s:a href="r_gotoLogin"><s:text name="back" /></s:a>
     </center>
   </body>
 </html>

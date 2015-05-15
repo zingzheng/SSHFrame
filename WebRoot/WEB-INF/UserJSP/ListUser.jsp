@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@include file="../JSP/CommonHead.jsp" %>
+<%@include file="../CommonJSP/CommonHead.jsp" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -80,7 +80,7 @@
    	</s:if>
    	
     <br/><br/><br/>
-    <s:a href="redirect_gotoMain"><s:text name="back" /></s:a>
+    <s:a href="redirect_gotoMain">>>主页</s:a>
     </center>
      
   </body>
