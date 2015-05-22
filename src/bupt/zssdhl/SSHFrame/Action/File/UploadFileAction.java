@@ -31,6 +31,16 @@ public class UploadFileAction extends ActionSupport{
 	private List<String> fileFileName;
 	private List<String> fileContentType;
 	
+	
+	@Override
+	public void validate(){
+		if(null == file || 
+				0 == file.size()){
+			this.addFieldError("file",
+					this.getText("required",new String[]{"нд╪Ч"}));
+		}
+	}
+	
 	@Override
 	public String execute() throws Exception{
 		

@@ -9,21 +9,10 @@
 			<generator class="native"></generator>	
 		</id>
 		
-		<property name="uuName" type="java.lang.String">
-			<column name="uuName" length="64"></column>
-		</property>
-		
 		<property name="fileName" type="java.lang.String">
 			<column name="fileName" length="64"></column>
 		</property>
 		
-		<property name="filePath" type="java.lang.String">
-			<column name="filePath" length="128"></column>
-		</property>
-		
-		<property name="MD5" type="java.lang.String">
-			<column name="MD5" length="64"></column>
-		</property>
 		
 		<property name="grade" type="java.lang.Integer">
 			<column name="grade" length="32"></column>
@@ -38,6 +27,8 @@
 		</property>
 		
 		<many-to-one name="userInfo" column="UserInfo_id"></many-to-one>
+		
+		<many-to-one name="filePhy" column="FilePhy_id"></many-to-one>
 	
 	</class>
 

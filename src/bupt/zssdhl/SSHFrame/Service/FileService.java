@@ -20,8 +20,6 @@ public interface FileService {
 	
 	public List<FileInfo> listAllFileInfosLimit(int pageGoto,int pageCount);
 	
-	public FileInfo getFileInfoByMD5(String MD5);
-	
 	//fileInfo中 fileName grade userinfo 是必须的
 	public void addFile(File file,String basePath, FileInfo fileInfo);
 	
@@ -29,5 +27,5 @@ public interface FileService {
 	
 	public void updateFileInfo(FileInfo fileInfo);
 	
-	public void delFile(FileInfo fileInfo);
+	public void delUserFile(FileInfo fileInfo);
 }

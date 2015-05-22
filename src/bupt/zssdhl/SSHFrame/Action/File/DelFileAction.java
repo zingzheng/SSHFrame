@@ -27,7 +27,7 @@ public class DelFileAction extends ActionSupport{
 		if(fileInfo != null){
 			if(userInfo.getGrade() == 0){
 				//管理员操作
-				fileService.delFile(fileInfo);
+				fileService.delUserFile(fileInfo);
 				if(flag == 1){
 					return "success2";
 				}else{
@@ -40,7 +40,7 @@ public class DelFileAction extends ActionSupport{
 					return "reject";
 				}else{
 					//用户自己操作
-					fileService.delFile(fileInfo);
+					fileService.delUserFile(fileInfo);
 					return SUCCESS;
 				}
 			}

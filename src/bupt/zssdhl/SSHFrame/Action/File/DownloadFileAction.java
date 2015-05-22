@@ -18,13 +18,13 @@ public class DownloadFileAction extends ActionSupport{
 	
 	public InputStream getDownload(){
 
-		return ServletActionContext.getServletContext().getResourceAsStream("\\upload\\"+fileInfo.getUuName());
+		return ServletActionContext.getServletContext().getResourceAsStream("\\upload\\"+fileInfo.getFilePhy().getUuName());
 	}
 	
 	public String execute() throws Exception{
 		
 		fileInfo = fileService.getFileInfoById(fileInfo.getId());
-		if(fileInfo == null){
+		if(fileInfo == null || fileInfo.getFilePhy() == null){
 			this.addActionError("该资源已经不存在！");
 			return "reject";
 		}

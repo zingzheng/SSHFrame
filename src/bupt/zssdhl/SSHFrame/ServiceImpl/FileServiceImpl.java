@@ -14,14 +14,19 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
+
+
 import bupt.zssdhl.SSHFrame.Bean.FileInfo;
+import bupt.zssdhl.SSHFrame.Bean.FilePhy;
 import bupt.zssdhl.SSHFrame.Dao.FileInfoDao;
+import bupt.zssdhl.SSHFrame.Dao.FilePhyDao;
 import bupt.zssdhl.SSHFrame.Service.FileService;
 import bupt.zssdhl.SSHFrame.Util.MD5Util;
 
 public class FileServiceImpl implements FileService {
 	
 	private FileInfoDao fileInfoDao;
+	private FilePhyDao filePhyDao;
 	private static Log _log = LogFactory.getLog(FileServiceImpl.class);
 	
 	public FileInfoDao getFileInfoDao() {
@@ -83,53 +88,42 @@ public class FileServiceImpl implements FileService {
 		return fileInfoDao.findAllFileInfos((pageGoto-1)*pageCount, pageCount);
 	}
 	
-	/**
-	 * 查找系统中是否有重复文件
-	 */
-	@Override
-	public FileInfo getFileInfoByMD5(String MD5) {
-		
-		return fileInfoDao.findeFileInfosByMD5(MD5);
-	}
 	
 	/**
-	 * 往数据库添加文件信息，且将文件上传到服务器
-	 * fileinfo中 filename grade userinfo已经设置好
+	 * 往数据库添加用户/物理文件信息，且将文件上传到服务器
+	 * fileinfo中 filename grade userinfo 需要在调用前设置好
 	 */
 	@Override
 	public void addFile(File file,String basePath, FileInfo fileInfo) {
-		FileInfo checkFileInfo = null;
+		
 		String MD5 = null;
 		try {
 			MD5 = MD5Util.getFileMD5String(file);
 		} catch (IOException e1) {
 			_log.error("无法获得MD5！");
 		}
-		
-		fileInfo.setMD5(MD5);
-		fileInfo.setDownloadTimes(0);
-		fileInfo.setUploadDate(new Date(System.currentTimeMillis()));
-		
-		checkFileInfo = getFileInfoByMD5(MD5);
-		if(null != checkFileInfo){
-			//存在重复文件
-			_log.info("文件已经存在于服务器，无需重复上传");
-			fileInfo.setFilePath(checkFileInfo.getFilePath());
-			fileInfo.setUuName(checkFileInfo.getUuName());
-		}else{
+		FilePhy filePhy = filePhyDao.getFilePhyByMD5(MD5);
+		if(null == filePhy){
+			//全新文件
 			_log.info("正在上传文件到服务器。。。。。");
+			
+			//保存文件物理信息
+			filePhy = new FilePhy();
+			filePhy.setMD5(MD5);
 			String fileName = fileInfo.getFileName();
 			String fileType = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 			String uuName = UUID.randomUUID().toString();
-			fileInfo.setUuName(uuName+fileType);
-			String filePath = basePath + "\\" + fileInfo.getUuName();
-			fileInfo.setFilePath(filePath);
+			filePhy.setUuName(uuName);
+			String filePath = basePath + "\\" + uuName;
+			filePhy.setFilePath(filePath);
+			filePhyDao.addFilePhy(filePhy);
 			
+			//上传文件到服务器
 			InputStream is = null;
 			OutputStream os = null;
 			try {
 				is = new FileInputStream(file);
-				File destFile = new File(basePath,fileInfo.getUuName());
+				File destFile = new File(basePath,uuName);
 				os = new FileOutputStream(destFile);
 				byte[] buffer = new byte[1024];
 				int length = 0;
@@ -150,15 +144,21 @@ public class FileServiceImpl implements FileService {
 					e.printStackTrace();
 				}
 			}
+			
+		}else{
+			//服务器已经存在该文件
+			_log.info("文件已经存在于服务器，无需重复上传");
 		}
 		
+		//保存用户文件信息
+		fileInfo.setDownloadTimes(0);
+		fileInfo.setUploadDate(new Date(System.currentTimeMillis()));
+		fileInfo.setFilePhy(filePhy);	
 		fileInfoDao.addFileInfo(fileInfo);
-		
-		
 	}
 	
 	/**
-	 * 通过文件id获得文件信息
+	 * 通过文件id获得用户文件信息
 	 */
 	@Override
 	public FileInfo getFileInfoById(int id) {
@@ -166,7 +166,7 @@ public class FileServiceImpl implements FileService {
 	}
 	
 	/**
-	 * 更新文件的数据库信息
+	 * 更新用户文件的数据库信息
 	 */
 	@Override
 	public void updateFileInfo(FileInfo fileInfo) {
@@ -175,17 +175,18 @@ public class FileServiceImpl implements FileService {
 	}
 	
 	/**
-	 * 删除文件 包括服务器文件内容及数据库记录
-	 * 更正，这里不能直接删除服务器上的文件
+	 * 删除用户文件信息
 	 */
 	@Override
-	public void delFile(FileInfo fileInfo) {
+	public void delUserFile(FileInfo fileInfo) {
 		fileInfoDao.delFileInfo(fileInfo);
-		File file = new File(fileInfo.getFilePath());
-		if(file.exists()){
-			file.delete();
-		}
-		
+	}
+	
+	public FilePhyDao getFilePhyDao() {
+		return filePhyDao;
+	}
+	public void setFilePhyDao(FilePhyDao filePhyDao) {
+		this.filePhyDao = filePhyDao;
 	}
 
 

@@ -17,7 +17,7 @@ public class UserInfo implements java.io.Serializable{
 	private Integer grade;
 	private String invitaCode;
 	
-	//private Set<FileInfo> fileInfos;
+	private Set<FileInfo> fileInfos;
 	
 	public Integer getId() {
 		return id;
@@ -56,14 +56,14 @@ public class UserInfo implements java.io.Serializable{
 		this.invitaCode = invitaCode;
 	}
 	
-	/*
+	
 	public Set<FileInfo> getFileInfos() {
 		return fileInfos;
 	}
 	public void setFileInfos(Set<FileInfo> fileInfos) {
 		this.fileInfos = fileInfos;
 	}
-	*/
+	
 	
 	
 }

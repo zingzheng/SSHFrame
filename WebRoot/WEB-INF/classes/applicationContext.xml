@@ -25,6 +25,7 @@
 	    	<list>
 	    		<value>bupt/zssdhl/SSHFrame/Bean/UserInfo.hbm.xml</value>
 	    		<value>bupt/zssdhl/SSHFrame/Bean/FileInfo.hbm.xml</value>
+	    		<value>bupt/zssdhl/SSHFrame/Bean/FilePhy.hbm.xml</value>
 	    	</list>
      	</property>
      	<property name="hibernateProperties">
@@ -57,6 +58,10 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<bean id="filePhyDao" class="bupt.zssdhl.SSHFrame.DaoImpl.FilePhyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 	
 	<!-- service bean -->
 	<bean id="userService" class="bupt.zssdhl.SSHFrame.ServiceImpl.UserServiceImpl">
@@ -65,6 +70,7 @@
 	
 	<bean id="fileService" class="bupt.zssdhl.SSHFrame.ServiceImpl.FileServiceImpl">
 		<property name="fileInfoDao" ref="fileInfoDao" />
+		<property name="filePhyDao" ref="filePhyDao" />
 	</bean>
 	
 	<bean id="tuRingService" class="bupt.zssdhl.SSHFrame.ServiceImpl.TuRingServiceImpl">
