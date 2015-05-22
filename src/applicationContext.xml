@@ -23,7 +23,8 @@
      	<property name="dataSource" ref="dataSource"/>
      	<property name="mappingResources">
 	    	<list>
-	    		<value>bupt/zssdhl/SSHFrame/Bean/User.hbm.xml</value>
+	    		<value>bupt/zssdhl/SSHFrame/Bean/UserInfo.hbm.xml</value>
+	    		<value>bupt/zssdhl/SSHFrame/Bean/FileInfo.hbm.xml</value>
 	    	</list>
      	</property>
      	<property name="hibernateProperties">
@@ -52,10 +53,18 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>	
 	
+	<bean id="fileInfoDao" class="bupt.zssdhl.SSHFrame.DaoImpl.FileInfoDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 	
 	<!-- service bean -->
 	<bean id="userService" class="bupt.zssdhl.SSHFrame.ServiceImpl.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	<bean id="fileService" class="bupt.zssdhl.SSHFrame.ServiceImpl.FileServiceImpl">
+		<property name="fileInfoDao" ref="fileInfoDao" />
 	</bean>
 	
 	<bean id="tuRingService" class="bupt.zssdhl.SSHFrame.ServiceImpl.TuRingServiceImpl">
@@ -95,6 +104,38 @@
 	
 	<bean id="tuRingAction" class="bupt.zssdhl.SSHFrame.Action.API.TuRingAction" scope="prototype">
 		<property name="tuRingService" ref="tuRingService" />
+	</bean>
+	
+	<bean id="listFileAction" class="bupt.zssdhl.SSHFrame.Action.File.ListFileAction" scope="prototype">
+		<property name="fileService" ref="fileService"></property>
+	</bean>
+	
+	<bean id="listPublicFileAction" class="bupt.zssdhl.SSHFrame.Action.File.ListPublicFileAction" scope="prototype">
+		<property name="fileService" ref="fileService"></property>
+	</bean>
+	
+	<bean id="listAllFileAction" class="bupt.zssdhl.SSHFrame.Action.File.ListAllFileAction" scope="prototype">
+		<property name="fileService" ref="fileService"></property>
+	</bean>
+	
+	<bean id="uploadFileAction" class="bupt.zssdhl.SSHFrame.Action.File.UploadFileAction" scope="prototype">
+		<property name="fileService" ref="fileService"></property>
+	</bean>
+	
+	<bean id="downloadFileAction" class="bupt.zssdhl.SSHFrame.Action.File.DownloadFileAction" scope="prototype">
+		<property name="fileService" ref="fileService"></property>
+	</bean>
+	
+	<bean id="delFileAction" class="bupt.zssdhl.SSHFrame.Action.File.DelFileAction" scope="prototype">
+		<property name="fileService" ref="fileService"></property>
+	</bean>
+	
+	<bean id="updateFilePreAction" class="bupt.zssdhl.SSHFrame.Action.File.UpdateFilePreAction" scope="prototype">
+		<property name="fileService" ref="fileService"></property>
+	</bean>
+	
+	<bean id="updateFileAction" class="bupt.zssdhl.SSHFrame.Action.File.UpdateFileAction" scope="prototype">
+		<property name="fileService" ref="fileService"></property>
 	</bean>
 	
 </beans>

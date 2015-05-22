@@ -7,18 +7,29 @@
 		
 		<!-- 拦截器 -->
 		<interceptors>
+			<!-- 登录校验 -->
 			<interceptor name="authInterceptor" class="bupt.zssdhl.SSHFrame.Interceptor.AuthInterceptor"></interceptor>
+			<!-- 操作权限校验 -->
+			<interceptor name="adminInterceptor" class="bupt.zssdhl.SSHFrame.Interceptor.AdminInterceptor"></interceptor>
 			
-			<interceptor-stack name="myStack">
+			<interceptor-stack name="auth">
 				<interceptor-ref name="authInterceptor"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
+			
+			<interceptor-stack name="auth_admin">
+				<interceptor-ref name="authInterceptor"></interceptor-ref>
+				<interceptor-ref name="adminInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+			
 		</interceptors>
 		
 		
 		<!-- 全局结果定义 -->
 		<global-results>
-			<result name="login" type="redirect">/index.jsp</result>
+			<result name="login">/index.jsp</result>
+			<result name="reject">/reject.jsp</result>
 		</global-results>
 			
 			
@@ -43,44 +54,93 @@
 		
 		<action name="listUser" class="listUserAction">
 			<result name="success">/WEB-INF/UserJSP/ListUser.jsp</result>
-			<interceptor-ref name="myStack"></interceptor-ref>
+			<interceptor-ref name="auth_admin"></interceptor-ref>
 		</action>
 		
 		<action name="updateUserPre" class="updateUserPreAction">
 			<result name="success">/WEB-INF/UserJSP/UpdateUser.jsp</result>
-			<interceptor-ref name="myStack"></interceptor-ref>
+			<interceptor-ref name="auth"></interceptor-ref>
 		</action>
 		
 		<action name="updateUser" class="updateUserAction">
-			<result name="success" type="redirect">listUser.action</result>
+			<!--  <result name="success" type="redirect">listUser.action</result>-->
+			<result name="success">/WEB-INF/UserJSP/UpdateUser.jsp</result>
 			<result name="input">/WEB-INF/UserJSP/UpdateUser.jsp</result>
-			<interceptor-ref name="myStack"></interceptor-ref>
+			<interceptor-ref name="auth"></interceptor-ref>
 		</action>
 		
 		<action name="delUser" class="delUserAction">
 			<result name="success" type="redirect">listUser.action</result>
-			<interceptor-ref name="myStack"></interceptor-ref>
+			<interceptor-ref name="auth_admin"></interceptor-ref>
 		</action>
 		
-		<!--不需要验证的跳转  -->
+		<!--不需要登录验证的跳转  -->
 		<action name="r_*" class="redirectAction" method="{1}">
 			<result name="gotoRegist" >/WEB-INF/UserJSP/Regist.jsp</result>
 			<result name="gotoLogin" >/WEB-INF/UserJSP/Login.jsp</result>
 		</action>
 		
+		<!-- 需要登录验证的跳转 -->
 		<action name="redirect_*" class="redirectAction" method="{1}">
 			<result name="gotoMain" >/WEB-INF/CommonJSP/MainFrame.jsp</result>
 			<result name="gotoListUser" type="redirect">listUser.action</result>
 			<result name="gotoTuRing" >/WEB-INF/ApiJSP/TuRing.jsp</result>
-			<interceptor-ref name="myStack"></interceptor-ref>
+			<interceptor-ref name="auth"></interceptor-ref>
 		</action>
 	
-	<action name="turing" class="tuRingAction">
-		<result name="success" >/WEB-INF/ApiJSP/TuRing.jsp</result>
-		<interceptor-ref name="myStack"></interceptor-ref>
-	</action>
+		<action name="turing" class="tuRingAction">
+			<result name="success" >/WEB-INF/ApiJSP/TuRing.jsp</result>
+			<interceptor-ref name="auth"></interceptor-ref>
+		</action>
 	
+		<action name="listFile" class="listFileAction">
+			<result name="success" >/WEB-INF/FileJSP/ListFile.jsp</result>
+			<interceptor-ref name="auth"></interceptor-ref>
+		</action>
+	
+		
+		<action name="uploadFile" class="uploadFileAction">
+			<result name="success" type="redirect">listFile.action</result>
+			<result name="input">/WEB-INF/FileJSP/ListFile.jsp</result>
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">4294967296</param>
+			</interceptor-ref>
+			<interceptor-ref name="auth"></interceptor-ref>
+		</action>
+		
+		<action name="listPublicFile" class="listPublicFileAction">
+			<result name="success" >/WEB-INF/FileJSP/ListPublicFile.jsp</result>
+			<interceptor-ref name="auth"></interceptor-ref>
+		</action>
+		
+		<action name="listAllFile" class="listAllFileAction">
+			<result name="success" >/WEB-INF/FileJSP/ListAllFile.jsp</result>
+			<interceptor-ref name="auth_admin"></interceptor-ref>
+		</action>
+		
+		<action name="downloadFile" class="downloadFileAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+				<param name="contentDisposition">attachment;filename="${fileInfo.fileName}"</param>
+				<param name="inputName">download</param>
+			</result>
+			<interceptor-ref name="auth"></interceptor-ref>
+		</action>
+		
+		<action name="delFile" class="delFileAction">
+			<result name="success" type="redirect">listFile</result>
+			<result name="success2" type="redirect">listAllFile</result>
+			<interceptor-ref name="auth"></interceptor-ref>
+		</action>
+		
+		<action name="updateFilePre" class="updateFilePreAction">
+			<result name="success">/WEB-INF/FileJSP/UpdateFile.jsp</result>
+		</action>
+		
+		<action name="updateFile" class="updateFileAction">
+			<result name="success">/WEB-INF/FileJSP/UpdateFile.jsp</result>
+			<result name="input">/WEB-INF/FileJSP/UpdateFile.jsp</result>
+		</action>
+		
 	</package>
-	
-
 </struts>    

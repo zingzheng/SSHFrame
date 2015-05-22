@@ -34,7 +34,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<s:password name="user.pwd" key="password"></s:password>
     		<s:password name="repwd" key="repwd"></s:password>
     		<s:textfield name="user.realname" key="realname"></s:textfield>
-    		<s:textfield name="user.grade" key="grade"></s:textfield>
+    		<!--<s:textfield name="user.grade" key="grade"></s:textfield>-->
+    		
+    			<select name="user.grade">
+    				<option value="0">管理员</option>
+    				<option value="1">普通用户</option>
+    			</select>
     		<s:textfield name="user.invitaCode" key="invitaCode"></s:textfield>
     		<s:submit key="regist"></s:submit>
     	</s:form>

@@ -4,7 +4,7 @@
           "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
           
 <hibernate-mapping package="bupt.zssdhl.SSHFrame.Bean">
-	<class name="User" table="User">
+	<class name="UserInfo" table="UserInfo" lazy="false">
 		<id name="id" column="id" type="java.lang.Integer">
 			<generator class="native"></generator>	
 		</id>
@@ -29,6 +29,12 @@
 			<column name="invitaCode" length="64"></column>
 		</property>
 	
+	<!--  
+		<set name="fileInfos" >
+			<key column="UserInfo_id"></key>
+			<one-to-many class="FileInfo"/>
+		</set>
+	-->
 	</class>
 
 </hibernate-mapping>

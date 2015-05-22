@@ -5,9 +5,8 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
-    
-    <title><s:text name="manageUser"></s:text></title>
+  <head>  
+    <title>共享资源</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -17,39 +16,40 @@
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	
+	
+	
   </head>
   
-  <body>
-    <h1 align="center"><s:text name="manageUser"></s:text></h1>
+<body>
+    <h1 align="center">共享资源</h1>
     
     
     	<s:actionerror/>
     <center>
     <table>
     	<tr>
-    		<td><s:text name="id"/></td>
-    		<td><s:text name="username"/></td>
-    		<td><s:text name="realname"/></td>
-    		<td><s:text name="grade" /></td>
-    		<td><s:text name="invitaCode" /></td>
-    		<td><s:text name="updateUser" /></td>
-    		<td><s:text name="delUser" /></td>
+    		<td>id</td>
+    		<td>文件名</td>
+    		<td>上传时间</td>
+    		<td>下载次数</td>
+    		<td>属性</td>
+    		<td>上传者</td>
+    		<td>下载</td>
     	</tr>
     	
-    	<s:iterator value="#request.users" id="user">
+    	<s:iterator value="#request.files" id="file">
     	<tr>
-    		<td><s:property value="#user.id"/></td>
-    		<td><s:property value="#user.username"/></td>
-    		<td><s:property value="#user.realname"/></td>
-    		<!--  <td><s:property value="#user.grade"/></td>-->
+    		<td><s:property value="#file.id"/></td>
+    		<td><s:property value="#file.fileName"/></td>
+    		<td><s:property value="#file.uploadDate"/></td>
+    		<td><s:property value="#file.downloadTimes"/></td>
     		<td>
-    			<s:if test="#user.grade==1">普通用户</s:if>
-    			<s:if test="#user.grade==0">管理员</s:if>
+    			<s:if test="#file.grade==1">私有</s:if>
+    			<s:if test="#file.grade==0">公开</s:if>
     		</td>
-    		<td><s:property value="#user.invitaCode"/></td>
-    		<td><s:a href="updateUserPre.action?user.id=%{#user.id}"><s:text name="updateUser"/></s:a></td>
-    		<td><s:a href="delUser.action?user.id=%{#user.id}"><s:text name="delUser"/></s:a></td>
+    		<td><s:property value="#file.userInfo.username"/></td>
+    		<td><s:a href="downloadFile.action?fileInfo.id=%{#file.id}">下载</s:a></td>
     	</tr>
     	
     	
@@ -63,7 +63,7 @@
    	<br/>
    	
    	<s:if test="%{page.PageCurrent!=1}">
-   		<a href="listUser.action?page.pageGoto=${page.pageCurrent-1}">
+   		<a href="listPublicFile.action?page.pageGoto=${page.pageCurrent-1}">
 			<s:text name="prepage"/>
 		</a>
    	</s:if>
@@ -73,15 +73,20 @@
 			[${i}]
    		</c:if>
    		<c:if test="${page.pageCurrent!=i}">
-			<a href="listUser.action?page.pageGoto=${i}">[${i}]</a>
+			<a href="listPublicFile.action?page.pageGoto=${i}">[${i}]</a>
    		</c:if>    	
     </c:forEach>
     
      <s:if test="%{page.PageCurrent!=page.pageSum}">
-   		<a href="listUser.action?page.pageGoto=${page.pageCurrent+1}">
+   		<a href="listPublicFile.action?page.pageGoto=${page.pageCurrent+1}">
    			<s:text name="nextpage"/>
    		</a>
    	</s:if>
+   	
+   	
+   	<br/><br/><br/>
+    <s:a href="listFile">>>返回我的网盘</s:a>
+    
    	
     <br/><br/><br/>
     <s:a href="redirect_gotoMain">>>主页</s:a>

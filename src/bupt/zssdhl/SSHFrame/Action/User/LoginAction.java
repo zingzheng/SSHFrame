@@ -7,7 +7,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import bupt.zssdhl.SSHFrame.Bean.User;
+import bupt.zssdhl.SSHFrame.Bean.UserInfo;
 import bupt.zssdhl.SSHFrame.Service.UserService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport{
 
-	private User user;
+	private UserInfo user;
 	private UserService userService;
 	private Log _log = LogFactory.getLog(LoginAction.class);
 	
@@ -52,12 +52,12 @@ public class LoginAction extends ActionSupport{
 		
 	}
 	
-	public User getUser() {
+	public UserInfo getUser() {
 		return user;
 	}
 
 
-	public void setUser(User user) {
+	public void setUser(UserInfo user) {
 		this.user = user;
 	}
 

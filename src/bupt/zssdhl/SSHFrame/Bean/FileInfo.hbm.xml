@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+          
+<hibernate-mapping package="bupt.zssdhl.SSHFrame.Bean" >
+	<class name="FileInfo" table="FileInfo" lazy="false">
+		<id name="id" column="id" type="java.lang.Integer">
+			<generator class="native"></generator>	
+		</id>
+		
+		<property name="uuName" type="java.lang.String">
+			<column name="uuName" length="64"></column>
+		</property>
+		
+		<property name="fileName" type="java.lang.String">
+			<column name="fileName" length="64"></column>
+		</property>
+		
+		<property name="filePath" type="java.lang.String">
+			<column name="filePath" length="128"></column>
+		</property>
+		
+		<property name="MD5" type="java.lang.String">
+			<column name="MD5" length="64"></column>
+		</property>
+		
+		<property name="grade" type="java.lang.Integer">
+			<column name="grade" length="32"></column>
+		</property>
+		
+		<property name="uploadDate" type="java.sql.Date">
+			<column name="uploadDate" ></column>
+		</property>
+		
+		<property name="downloadTimes" type="java.lang.Integer">
+			<column name="downloadTimes" length="32"></column>
+		</property>
+		
+		<many-to-one name="userInfo" column="UserInfo_id"></many-to-one>
+	
+	</class>
+
+</hibernate-mapping>

@@ -1,18 +1,23 @@
 package bupt.zssdhl.SSHFrame.Bean;
 
+import java.util.Set;
+
 /**
  * 用户信息bean类
  * @author zss
  *
  */
-public class User {
+public class UserInfo implements java.io.Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String username;
 	private String pwd;
 	private String realname;
 	private Integer grade;
 	private String invitaCode;
+	
+	//private Set<FileInfo> fileInfos;
 	
 	public Integer getId() {
 		return id;
@@ -51,6 +56,14 @@ public class User {
 		this.invitaCode = invitaCode;
 	}
 	
+	/*
+	public Set<FileInfo> getFileInfos() {
+		return fileInfos;
+	}
+	public void setFileInfos(Set<FileInfo> fileInfos) {
+		this.fileInfos = fileInfos;
+	}
+	*/
 	
 	
 }

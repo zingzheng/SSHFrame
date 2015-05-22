@@ -1,14 +1,12 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@include file="../CommonJSP/CommonHead.jsp" %>
-
-
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     
-    <title>登山包</title>
+    
+    <title>没有权限</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -22,14 +20,9 @@
   </head>
   
   <body>
-    <br/>
-    <br/>
-    <br/>
+    <s:actionerror/>
+    <br/><br/><br/>
+    <s:a href="redirect_gotoMain">>>主页</s:a>
     
-    <s:if test="#session.userSession.grade==0">
-    	<s:a href="listUser"><s:text name="manageUser" /></s:a><br/><br/>
-    </s:if>
-    <s:a href="redirect_gotoTuRing">机器人</s:a><br/><br/>
-    <s:a href="listFile">网盘</s:a><br/><br/>
   </body>
 </html>

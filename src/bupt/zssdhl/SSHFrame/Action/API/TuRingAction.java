@@ -2,7 +2,7 @@ package bupt.zssdhl.SSHFrame.Action.API;
 
 import java.util.Map;
 
-import bupt.zssdhl.SSHFrame.Bean.User;
+import bupt.zssdhl.SSHFrame.Bean.UserInfo;
 import bupt.zssdhl.SSHFrame.Service.TuRingService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -20,7 +20,7 @@ public class TuRingAction extends ActionSupport{
 		
 		
 		Map map = ActionContext.getContext().getSession();
-		User  user = (User) map.get("userSession");
+		UserInfo  user = (UserInfo) map.get("userSession");
 		String username = user.getUsername();
 		
 		String resp = tuRingService.talking(msgReceive,username);

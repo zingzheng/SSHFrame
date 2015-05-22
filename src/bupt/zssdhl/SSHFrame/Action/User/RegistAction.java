@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
 
-import bupt.zssdhl.SSHFrame.Bean.User;
+import bupt.zssdhl.SSHFrame.Bean.UserInfo;
 import bupt.zssdhl.SSHFrame.Service.UserService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class RegistAction extends ActionSupport{
 	
-	private User user;
+	private UserInfo user;
 	private UserService userService;
 	private String repwd;
 	private Log _log = LogFactory.getLog(RegistAction.class);
@@ -68,10 +68,10 @@ public class RegistAction extends ActionSupport{
 	
 	
 	
-	public User getUser() {
+	public UserInfo getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserInfo user) {
 		this.user = user;
 	}
 	public UserService getUserService() {

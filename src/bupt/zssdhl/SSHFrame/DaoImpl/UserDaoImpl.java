@@ -8,7 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import bupt.zssdhl.SSHFrame.Bean.User;
+import bupt.zssdhl.SSHFrame.Bean.UserInfo;
 import bupt.zssdhl.SSHFrame.Dao.UserDao;
 
 
@@ -19,72 +19,72 @@ public class UserDaoImpl implements UserDao {
 	private static Log _log = LogFactory.getLog(UserDaoImpl.class);
 	
 	@Override
-	public void addUser(User user) {
+	public void addUser(UserInfo userInfo) {
 		
-		sessionFactory.getCurrentSession().save(user);
+		sessionFactory.getCurrentSession().save(userInfo);
 	}
 
 	@Override
-	public void delUser(User user) {
+	public void delUser(UserInfo userInfo) {
 		
-		sessionFactory.getCurrentSession().delete(user);
+		sessionFactory.getCurrentSession().delete(userInfo);
 	}
 
 	@Override
-	public void update(User user) {
+	public void update(UserInfo userInfo) {
 
-		sessionFactory.getCurrentSession().update(user);
+		sessionFactory.getCurrentSession().update(userInfo);
 	}
 
 	@Override
-	public User findUserById(Integer id) {
+	public UserInfo findUserById(Integer id) {
 
-		return (User)sessionFactory.getCurrentSession().get(User.class, id);
+		return (UserInfo)sessionFactory.getCurrentSession().get(UserInfo.class, id);
 	}
 
 
 	@Override
-	public User findUserByUsername(String username) {
+	public UserInfo findUserByUsername(String username) {
 		
 		_log.info("finding user from db where username="+username);
-		User user = null;
+		UserInfo userInfo = null;
 		Query query = sessionFactory.getCurrentSession()
-				.createQuery("from User where username =:username");
+				.createQuery("from UserInfo where username =:username");
 		query.setParameter("username", username);
 		
-		List<User> userList = query.list();
+		List<UserInfo> userList = query.list();
 
 		if(0 != userList.size()){
-			user = userList.get(0);
+			userInfo = userList.get(0);
 			_log.info("find user by username");
 			
 		}else{
-			_log.warn("there is no such username");
+			_log.info("there is no such username");
 		}
-		return user;
+		return userInfo;
 	}
 	
 	@Override
-	public List<User> findAllUsers() {
+	public List<UserInfo> findAllUsers() {
 		
 		Query query = sessionFactory.getCurrentSession()
-				.createQuery("from User order by id");
-		return (List<User>)query.list();
+				.createQuery("from UserInfo order by id");
+		return (List<UserInfo>)query.list();
 	}
 	
 	@Override
-	public List<User> findUsersLimit(int firstResult,int maxResult){
+	public List<UserInfo> findUsersLimit(int firstResult,int maxResult){
 		Query query = sessionFactory.getCurrentSession()
-				.createQuery("from User order by id");
+				.createQuery("from UserInfo order by id");
 		query.setFirstResult(firstResult);
 		query.setMaxResults(maxResult);
-		return (List<User>)query.list();
+		return (List<UserInfo>)query.list();
 	}
 	
 	@Override
 	public int getUserCount(){
 		Query query = sessionFactory.getCurrentSession()
-				.createQuery("select count(*) from User");
+				.createQuery("select count(*) from UserInfo");
 		return Integer.valueOf(((Long)query.uniqueResult()).toString());
 		  
 	}

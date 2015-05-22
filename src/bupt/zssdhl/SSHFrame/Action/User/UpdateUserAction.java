@@ -1,6 +1,6 @@
 package bupt.zssdhl.SSHFrame.Action.User;
 
-import bupt.zssdhl.SSHFrame.Bean.User;
+import bupt.zssdhl.SSHFrame.Bean.UserInfo;
 import bupt.zssdhl.SSHFrame.Service.UserService;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -8,7 +8,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class UpdateUserAction extends ActionSupport{
 	
 	private UserService userService;
-	private User user;
+	private UserInfo user;
 	private String newpwd;
 	private String repwd;
 	
@@ -50,7 +50,7 @@ public class UpdateUserAction extends ActionSupport{
 			user.setPwd(newpwd);
 		}
 		userService.updateUser(user);
-		
+		addActionMessage("ÐÞ¸Ä³É¹¦£¡");
 		return SUCCESS;
 	}
 	
@@ -60,10 +60,10 @@ public class UpdateUserAction extends ActionSupport{
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	public User getUser() {
+	public UserInfo getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserInfo user) {
 		this.user = user;
 	}
 	

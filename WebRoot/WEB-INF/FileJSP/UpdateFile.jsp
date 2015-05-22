@@ -6,7 +6,7 @@
 <html>
   <head>
     
-    <title><s:text name="updateUser"></s:text></title>
+    <title>修改文件</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -20,23 +20,18 @@
   </head>
   
   <body>
-    <h1 align="center"><s:text name="updateUser"></s:text></h1>
+    <h1 align="center">修改文件</h1>
     
     
     	
     <center>
     	<s:actionmessage/>
     	<s:actionerror/>
-    	<s:form action="updateUser" namespace="/" method="post">
+    	<s:form action="updateFile" namespace="/" method="post">
     		<s:token></s:token>
-    		<s:hidden name="user.id" value="%{user.id}"></s:hidden>
-    		<s:hidden name="user.pwd" value="%{user.pwd}"></s:hidden>
-    		<s:textfield name="user.username" key="username" value="%{user.username}" ></s:textfield>
-    		<s:password name="newpwd" key="newpassword"></s:password>
-    		<s:password name="repwd" key="repwd"></s:password>
-    		<s:textfield name="user.realname" key="realname" value="%{user.realname}"></s:textfield>
-    		<s:textfield name="user.grade" key="grade" value="%{user.grade}"></s:textfield>
-    		<s:textfield name="user.invitaCode" key="invitaCode" value="%{user.invitaCode}"></s:textfield>
+    		<s:hidden name="fileInfo.id" value="%{fileInfo.id}"></s:hidden>
+    		<s:textfield name="fileInfo.fileName" label="文件名" value="%{fileInfo.fileName}" ></s:textfield>
+    		<s:select name="fileInfo.grade" list="#{'0':'共享','1':'私有'}" label="属性" headerKey="%{fileInfo.grade}"></s:select>
     		<s:submit key="submit"></s:submit>
     	
     	</s:form>
@@ -46,8 +41,11 @@
     
     <br/><br/><br/>
     <s:if test="#session.userSession.grade==0">
-    <s:a href="redirect_gotoListUser">>><s:text name="manageUser" /></s:a>
+    <s:a href="listAllFile.action">>>管理全部文件</s:a>
     </s:if>
+    
+    <br/><br/><br/>
+    <s:a href="listFile.action">>>我的网盘</s:a>
     
     <br/><br/><br/>
     <s:a href="redirect_gotoMain">>>主页</s:a>

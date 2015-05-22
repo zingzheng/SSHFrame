@@ -3,23 +3,23 @@ package bupt.zssdhl.SSHFrame.Dao;
 
 import java.util.List;
 
-import bupt.zssdhl.SSHFrame.Bean.User;
+import bupt.zssdhl.SSHFrame.Bean.UserInfo;
 
 public interface UserDao {
 	
-	public void addUser(User user);
+	public void addUser(UserInfo userInfo);
 	
-	public void delUser(User user);
+	public void delUser(UserInfo userInfo);
 	
-	public void update(User user);
+	public void update(UserInfo userInfo);
 	
-	public User findUserById(Integer id);
+	public UserInfo findUserById(Integer id);
 	
-	public User findUserByUsername(String username);
+	public UserInfo findUserByUsername(String username);
 	
-	public List<User> findAllUsers();
+	public List<UserInfo> findAllUsers();
 	
-	public List<User> findUsersLimit(int firstResult,int maxResult);
+	public List<UserInfo> findUsersLimit(int firstResult,int maxResult);
 	
 	public int getUserCount();
 	

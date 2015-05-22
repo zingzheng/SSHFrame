@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import bupt.zssdhl.SSHFrame.Bean.Page;
-import bupt.zssdhl.SSHFrame.Bean.User;
+import bupt.zssdhl.SSHFrame.Bean.UserInfo;
 import bupt.zssdhl.SSHFrame.Service.UserService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -25,7 +25,7 @@ public class ListUserAction extends ActionSupport{
 	@Override
 	public String execute() throws Exception{
 		
-		//由于页码从1开始，为0说明非通过页码选择发送请求
+		//非通过页码选择发送请求
 		if(null == page){
 			page = new Page();
 			page.setPageGoto(1);
@@ -34,7 +34,7 @@ public class ListUserAction extends ActionSupport{
 		page.setPageCount(5);
 		page.setPageCurrent(page.getPageGoto());
 		page.setPageSum(userService.getPageSum(page.getPageCount()));
-		List<User> users = userService.listUserLimit(page.getPageGoto(), page.getPageCount());
+		List<UserInfo> users = userService.listUserLimit(page.getPageGoto(), page.getPageCount());
 		//List<User> users = userService.listAllUsers();
 		Map request = (Map)ActionContext.getContext().get("request");
 		request.put("users", users);
